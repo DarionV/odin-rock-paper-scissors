@@ -5,9 +5,9 @@
 }
 
 body {
-    /* background-color: black; */
     background-image: url("/images/brick_background.png");
     background-position: center;
+    background-size: cover;
     display: flex;
     flex-direction: column;
     height:100vh;
@@ -40,12 +40,7 @@ body {
     margin-bottom: 20px;
 }
 
-.main {
-  
-}
-
 .footer {
-    /* background-color: rgb(21, 21, 21); */
     margin-top: auto;
     display: flex;
     justify-content: center;
@@ -55,3 +50,15 @@ body {
     color: rgb(124, 124, 124);
     font-weight: normal;
 }
+
+.weaponButton {
+    all:unset;
+    cursor: pointer;
+    height:60px;
+    transition: translate 0.2s;
+}
+
+.weaponButton:hover {
+    translate: 0 -10px;
+}
+
