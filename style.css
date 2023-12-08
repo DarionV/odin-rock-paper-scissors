@@ -31,7 +31,7 @@ body {
     width: auto;
 }
 
-.weapon {
+.weaponImage {
     height: 200px;
 }
 
@@ -54,11 +54,51 @@ body {
 .weaponButton {
     all:unset;
     cursor: pointer;
-    height:60px;
+    transition-property: background-image, translate;
+    transition-duration: 0.3s; 
+}
+
+.rock {
+    background-image: url('/images/rock_on.png');
+}
+.paper {
+    background-image: url('/images/paper_on.png');
+}
+.scissors {
+    background-image: url('/images/scissors_on.png');
+}
+.rock, .paper, .scissors {
+    background-position: center;
+    background-size: contain;
+    width: 200px;
+    height: 200px;
+}
+
+.weaponImage {
     transition: translate 0.2s;
 }
 
-.weaponButton:hover {
+.hoverState {
     translate: 0 -10px;
+}
+
+.selected {
+    translate: 0 -40px;
+}
+
+.deselected {
+    translate: 0 20px;
+}
+
+.deselected.rock {
+    background-image: url('/images/rock_off.png');
+}
+
+.deselected.paper {
+    background-image: url('/images/paper_off.png');
+}
+
+.deselected.scissors {
+    background-image: url('/images/scissors_off.png');
 }
 

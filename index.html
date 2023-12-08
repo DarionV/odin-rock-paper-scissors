@@ -4,42 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors</title>
-    <script src = "script.js"></script>
+    <script src = "script.js" defer></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="logo">
+    <div class="header">
         <img src="/images/logo_rock.png">
         <img src="/images/logo_paper.png">
         <img src="/images/logo_scissors.png">
     </div>
 
-    <div class = "weaponContainer computer">
-        <img src="/images/rock_off.png" class="weapon">
-        <img src="/images/paper_off.png" class="weapon">
-        <img src="/images/scissors_off.png" class="weapon">
+    <div class="main">
+        <div class = "weaponContainer computer">
+            <img src="/images/rock_off.png" class="weaponImage">
+            <img src="/images/paper_off.png" class="weaponImage">
+            <img src="/images/scissors_off.png" class="weaponImage">
+        </div>
+
+        <div class="score computer">
+            <img src="/images/point_off.png" class="point" id="computer-point-01">
+            <img src="/images/point_off.png" class="point" id="computer-point-02">
+            <img src="/images/point_off.png" class="point" id="computer-point-03">
+            <img src="/images/point_off.png" class="point" id="computer-point-04">
+            <img src="/images/point_off.png" class="point" id="computer-point-05">
+        </div>
+        <div class="divider"> </div>
+        <div class="score player">
+            <img src="/images/point_off.png" class="point" id="player-point-01">
+            <img src="/images/point_off.png" class="point" id="player-point-02">
+            <img src="/images/point_off.png" class="point" id="player-point-03">
+            <img src="/images/point_off.png" class="point" id="player-point-04">
+            <img src="/images/point_off.png" class="point" id="player-point-05">
+        </div>
+
+        <div class = "weaponContainer player">
+            <button class = "weaponButton rock" id="rock-button"></button>
+            <button class = "weaponButton paper" id="paper-button"></button>
+            <button class = "weaponButton scissors" id="scissors-button"></button>
+        </div>
+        
     </div>
 
-    <div class="score computer">
-        <img src="/images/point_off.png" class="point" id="computer-point-01">
-        <img src="/images/point_off.png" class="point" id="computer-point-02">
-        <img src="/images/point_off.png" class="point" id="computer-point-03">
-        <img src="/images/point_off.png" class="point" id="computer-point-04">
-        <img src="/images/point_off.png" class="point" id="computer-point-05">
-    </div>
-    <div class="divider"> </div>
-    <div class="score player">
-        <img src="/images/point_off.png" class="point" id="player-point-01">
-        <img src="/images/point_off.png" class="point" id="player-point-02">
-        <img src="/images/point_off.png" class="point" id="player-point-03">
-        <img src="/images/point_off.png" class="point" id="player-point-04">
-        <img src="/images/point_off.png" class="point" id="player-point-05">
-    </div>
-
-    <div class = "weaponContainer player">
-        <img src="/images/rock_on.png" class="weapon">
-        <img src="/images/paper_on.png" class="weapon">
-        <img src="/images/scissors_on.png" class="weapon">
+    <div class="footer">
+        <h3>Copyright &copy Darion Valdez 2023 - Icons from flaticons.com</h3>
     </div>
     
 </body>
