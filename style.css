@@ -1,0 +1,25 @@
+body {
+    background-color: black;
+}
+
+.logo, .weaponContainer, .score, .divider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.divider {
+    background-color: rgb(151, 151, 151);
+    width: 500px;
+    height: 1px;
+    margin: 10px auto;
+}
+
+.point {
+    height: 42px;
+    width: auto;
+}
+
+.weapon {
+    height: 200px;
+}
