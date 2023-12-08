@@ -5,7 +5,9 @@
 }
 
 body {
-    background-color: black;
+    /* background-color: black; */
+    background-image: url("/images/brick_background.png");
+    background-position: center;
     display: flex;
     flex-direction: column;
     height:100vh;
@@ -43,7 +45,7 @@ body {
 }
 
 .footer {
-    background-color: rgb(21, 21, 21);
+    /* background-color: rgb(21, 21, 21); */
     margin-top: auto;
     display: flex;
     justify-content: center;
