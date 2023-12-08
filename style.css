@@ -55,7 +55,7 @@ body {
     all:unset;
     cursor: pointer;
     transition-property: background-image, translate;
-    transition-duration: 0.3s; 
+    transition-duration: 0.1s; 
 }
 
 .rock {
@@ -75,7 +75,7 @@ body {
 }
 
 .weaponImage {
-    transition: translate 0.2s;
+    transition: translate 0.1s;
 }
 
 .hoverState {
@@ -90,15 +90,19 @@ body {
     translate: 0 20px;
 }
 
-.deselected.rock {
+.off.rock {
     background-image: url('/images/rock_off.png');
 }
 
-.deselected.paper {
+.off.paper {
     background-image: url('/images/paper_off.png');
 }
 
-.deselected.scissors {
+.off.scissors {
     background-image: url('/images/scissors_off.png');
+}
+
+.weaponButton.computer {
+    cursor: default;
 }
 
