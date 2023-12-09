@@ -12,6 +12,33 @@ let randomInt;
 const MAX_SCORE = 5;
 const POINT_DELAY = 1000;
 
+const audioStatic01 = new Audio("/audio/static_01.m4a");
+audioStatic01.volume = 0.1;
+
+const audioDefeat = new Audio("/audio/defeat.m4a");
+audioDefeat.volume = 0.1;
+
+const audioLose = new Audio("/audio/lose.m4a");
+audioLose.volume = 0.1;
+
+const audioPointOn = new Audio("/audio/point_on.m4a");
+audioPointOn.volume=0.1;
+            
+
+const audioStatic02 = new Audio("/audio/static_02.m4a");
+audioStatic02.volume = 0.005;
+audioStatic02.play();
+audioStatic02.loop = true;
+
+
+const audioSwitch05 = new Audio("/audio/switch_05.m4a");
+const audioSwitch06 = new Audio("/audio/switch_06.m4a");
+const audioSwitch07 = new Audio("/audio/switch_07.m4a");
+const audioSwitch09 = new Audio("/audio/switch_09.m4a");
+
+audioSwitch07.volume = 0.2;
+audioSwitch09.volume = 0.2;
+
 const rockButton = document.querySelector('#rock-button-player');
 const paperButton = document.querySelector('#paper-button-player');
 const scissorsButton = document.querySelector('#scissors-button-player');
@@ -33,7 +60,6 @@ const computerPoint04 = document.querySelector('#computer-point-04');
 const computerPoint05 = document.querySelector('#computer-point-05');
 
 let isPlaying = false;
-
 document.addEventListener('click',(event)=> {
     switch (event.target.id) {
         case 'rock-button-player':
@@ -112,6 +138,9 @@ function flash() {
 }
 
 function awardPoint(winner){
+
+    audioPointOn.play();
+    
     if(winner == 'player') {
         playerScore ++;
         if(playerScore <= MAX_SCORE) {
@@ -235,14 +264,24 @@ function renderComputerChoice(choice) {
 
     currentRandomInt = choice;
 
+    
+    audioStatic01.play();
+    
+
     switch(choice) {
         case 0:
+            const audioSwitch04 = new Audio("/audio/switch_04.m4a");
+            audioSwitch04.volume = 0.05;
+            audioSwitch04.play();
             rockButtonComputer.classList.toggle('off');
             if(!paperButtonComputer.classList.contains('off')) paperButtonComputer.classList.toggle('off');
             if(!scissorsButtonComputer.classList.contains('off')) scissorsButtonComputer.classList.toggle('off');       
         break;
 
         case 1:
+            const audioSwitch05 = new Audio("/audio/switch_05.m4a");
+            audioSwitch05.volume = 0.05;
+            audioSwitch05.play();
             paperButtonComputer.classList.toggle('off');
             if(!rockButtonComputer.classList.contains('off')) rockButtonComputer.classList.toggle('off');
             if(!scissorsButtonComputer.classList.contains('off')) scissorsButtonComputer.classList.toggle('off'); 
@@ -250,6 +289,9 @@ function renderComputerChoice(choice) {
         break;
 
         case 2:
+            const audioSwitch06 = new Audio("/audio/switch_06.m4a");
+            audioSwitch06.volume = 0.05;
+            audioSwitch06.play();
              scissorsButtonComputer.classList.toggle('off');
              if(!paperButtonComputer.classList.contains('off')) paperButtonComputer.classList.toggle('off');
              if(!rockButtonComputer.classList.contains('off')) rockButtonComputer.classList.toggle('off'); 
@@ -264,6 +306,7 @@ function renderComputerChoice(choice) {
 
 
 function roundWin(){
+    audioLose.play();
     setTimeout(() => {awardPoint('player')}, POINT_DELAY);
     if(!rockButtonComputer.classList.contains('off')) rockButtonComputer.classList.toggle('off');
     if(!paperButtonComputer.classList.contains('off')) paperButtonComputer.classList.toggle('off');
@@ -272,6 +315,7 @@ function roundWin(){
 }
 
 function roundLose() {
+    audioLose.play();
     setTimeout(() => {awardPoint('computer')}, POINT_DELAY);
     if(!rockButton.classList.contains('off')) rockButton.classList.toggle('off');
     if(!paperButton.classList.contains('off')) paperButton.classList.toggle('off');
@@ -305,6 +349,8 @@ function victory(){
 }
 
 function defeat(){
+    audioDefeat.play();
+
     let nrOfFlashes = 6;
     let i = 0;
 
