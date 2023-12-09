@@ -4,6 +4,7 @@ let playerScore = 0;
 let computerScore = 0;
 
 let currentComputerSelection = '';
+let playerSelection;
 
 let currentRandomInt;
 let randomInt;
@@ -21,18 +22,18 @@ let isPlaying = false;
 document.addEventListener('click',(event)=> {
     switch (event.target.id) {
         case 'rock-button-player':
-            playRound('rock');
-            
+            playerSelection = 'rock';
         break;
 
         case 'paper-button-player':
-            playRound('paper');
+            playerSelection = 'paper';
         break;
 
         case 'scissors-button-player':
-            playRound('scissors');
+            playerSelection = 'scissors';
         break;
     }
+    playRound();
 });
 
 //Work around for hover state that is not working properly. When clicking a button the image is being translated upwards,
@@ -61,24 +62,27 @@ scissorsButton.addEventListener('mouseleave',()=> {
 });
 
 
-function getComputerChoice(){
+function generateComputerChoice(){
 
     let i = 0;
     let fastSpins = 5;
     let spinRate = 100;
     let minimumSpeed = 300;
+    let choice = 0;
 
     function loopSelection(){
-        renderComputerChoice(getRandomInt(3))
+        choice = getRandomInt(3);
+        renderComputerChoice(choice)
         i++;
         if (spinRate < minimumSpeed) {
             if(i >= fastSpins) spinRate += 10 * 1.6;
             setTimeout(loopSelection,spinRate);
+        } else {
+            setTimeout(() => {evaluateResult(choice);}, 500);
         }
     }
 
     loopSelection();
-
 }
 
 function renderComputerChoice(choice) {
@@ -87,14 +91,12 @@ function renderComputerChoice(choice) {
 
     switch(choice) {
         case 0:
-            console.log('ROCK');
             rockButtonComputer.classList.toggle('off');
             if(!paperButtonComputer.classList.contains('off')) paperButtonComputer.classList.toggle('off');
             if(!scissorsButtonComputer.classList.contains('off')) scissorsButtonComputer.classList.toggle('off');       
         break;
 
         case 1:
-            console.log('PAPER');
             paperButtonComputer.classList.toggle('off');
             if(!rockButtonComputer.classList.contains('off')) rockButtonComputer.classList.toggle('off');
             if(!scissorsButtonComputer.classList.contains('off')) scissorsButtonComputer.classList.toggle('off'); 
@@ -102,7 +104,6 @@ function renderComputerChoice(choice) {
         break;
 
         case 2:
-            console.log('SCISSORS');
              scissorsButtonComputer.classList.toggle('off');
              if(!paperButtonComputer.classList.contains('off')) paperButtonComputer.classList.toggle('off');
              if(!rockButtonComputer.classList.contains('off')) rockButtonComputer.classList.toggle('off'); 
@@ -117,23 +118,15 @@ function renderComputerChoice(choice) {
 
 
 function roundWin(){
-    playerScore ++;
-    logResult();
     console.log('You won!');
-    logScore();
 }
 
 function roundLose() {
-    computerScore ++;
-    logResult();
     console.log('You lost!');
-    logScore();
 }
 
 function roundTie(){
-    logResult();
     console.log("It's a tie!");
-    logScore();
 }
 
 function victory(){
@@ -144,7 +137,7 @@ function defeat(){
     console.log('DEAFEAT! You lost best of 5 games.');
 }
 
-function playRound(playerSelection){
+function playRound(){
 
     isPlaying = true;
 
@@ -179,48 +172,52 @@ function playRound(playerSelection){
     
     
 
-    computerSelection = getComputerChoice();
+    generateComputerChoice();
+    //console.log('computer selecrion is ' + computerSelection);
     isPlaying = false;
 
-        // switch (computerSelection) {
-        //     case 'rock':
-        //         if (playerSelection !== 'rock') 
-        //             playerSelection == 'paper' ? roundWin() : roundLose();
-        //         else 
-        //             roundTie()
-        //     break;
-
-        //     case 'paper':
-        //         if (playerSelection !== 'paper') 
-        //             playerSelection == 'scissors' ? roundWin() : roundLose();
-        //         else 
-        //             roundTie()                    
-        //     break;
-
-        //     case 'scissors':
-        //         if (playerSelection !== 'scissors') 
-        //             playerSelection == 'rock' ? roundWin() : roundLose();
-        //         else 
-        //             roundTie()
-        //     break;
-
-        //     default: 
-        //         console.log('Try again...');
-        // }
+    //setTimeout(function () {evaluateResult(playerSelection, computerSelection)},5000);
 
 }
 
-function getRandomInt(max){
+function evaluateResult(computerSelection){
 
+    // 0=Rock, 1=Paper, 2=Scissors
+
+     switch (computerSelection) {
+            case 0:
+                if (playerSelection !== 'rock') 
+                    playerSelection == 'paper' ? roundWin() : roundLose();
+                else 
+                    roundTie()
+            break;
+
+            case 1:
+                if (playerSelection !== 'paper') 
+                    playerSelection == 'scissors' ? roundWin() : roundLose();
+                else 
+                    roundTie()                    
+            break;
+
+            case 2:
+                if (playerSelection !== 'scissors') 
+                    playerSelection == 'rock' ? roundWin() : roundLose();
+                else 
+                    roundTie()
+            break;
+
+            default: 
+                roundTie()
+                console.log('Something went wrong');
+        }
+}
+
+function getRandomInt(max){
     while(randomInt == currentRandomInt) {
      randomInt = Math.floor(Math.random() * max);
     }
-
-    console.log(randomInt);
     currentRandomInt = randomInt;
-    return randomInt;
-   
-    
+    return randomInt; 
 }
 
 function game () {
