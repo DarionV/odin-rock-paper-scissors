@@ -55,7 +55,7 @@ body {
     all:unset;
     cursor: pointer;
     transition-property: background-image, translate;
-    transition-duration: 0.1s; 
+    transition-duration: 0.2s; 
 }
 
 .rock {
@@ -84,10 +84,15 @@ body {
 
 .selected {
     translate: 0 -40px;
+    cursor: default;
 }
 
 .deselected {
     translate: 0 20px;
+    cursor: default;
+}
+.off {
+    cursor: default;
 }
 
 .off.rock {
@@ -104,5 +109,11 @@ body {
 
 .weaponButton.computer {
     cursor: default;
+}
+
+.activePoint {
+    background-image: url('/images/point_on.png');
+    background-position: center;
+    background-size: contain;
 }
 

@@ -9,6 +9,9 @@ let playerSelection;
 let currentRandomInt;
 let randomInt;
 
+const MAX_SCORE = 5;
+const POINT_DELAY = 1000;
+
 const rockButton = document.querySelector('#rock-button-player');
 const paperButton = document.querySelector('#paper-button-player');
 const scissorsButton = document.querySelector('#scissors-button-player');
@@ -17,49 +20,191 @@ const rockButtonComputer = document.querySelector('#rock-button-computer');
 const paperButtonComputer = document.querySelector('#paper-button-computer');
 const scissorsButtonComputer = document.querySelector('#scissors-button-computer');
 
+const playerPoint01 = document.querySelector('#player-point-01');
+const playerPoint02 = document.querySelector('#player-point-02');
+const playerPoint03 = document.querySelector('#player-point-03');
+const playerPoint04 = document.querySelector('#player-point-04');
+const playerPoint05 = document.querySelector('#player-point-05');
+
+const computerPoint01 = document.querySelector('#computer-point-01');
+const computerPoint02 = document.querySelector('#computer-point-02');
+const computerPoint03 = document.querySelector('#computer-point-03');
+const computerPoint04 = document.querySelector('#computer-point-04');
+const computerPoint05 = document.querySelector('#computer-point-05');
+
 let isPlaying = false;
 
 document.addEventListener('click',(event)=> {
     switch (event.target.id) {
         case 'rock-button-player':
-            playerSelection = 'rock';
+            if(!isPlaying) playerSelection = 'rock';
         break;
 
         case 'paper-button-player':
-            playerSelection = 'paper';
+            if(!isPlaying) playerSelection = 'paper';
         break;
 
         case 'scissors-button-player':
-            playerSelection = 'scissors';
+            if(!isPlaying) playerSelection = 'scissors';
         break;
+
+        default:
+            return;
     }
-    playRound();
+    if(!isPlaying) playRound();
 });
 
 //Work around for hover state that is not working properly. When clicking a button the image is being translated upwards,
 //however the hover property prevented the image from being translated until the user removed the mouse pointer from the image.
+
 
 rockButton.addEventListener('mouseenter',()=> {
     rockButton.classList.toggle('hoverState');
 });
 
 rockButton.addEventListener('mouseleave',()=> {
-    rockButton.classList.toggle('hoverState');
+    if(rockButton.classList.contains('hoverState'))rockButton.classList.toggle('hoverState');
 });
 paperButton.addEventListener('mouseenter',()=> {
     paperButton.classList.toggle('hoverState');
 });
 
 paperButton.addEventListener('mouseleave',()=> {
-    paperButton.classList.toggle('hoverState');
+    if(paperButton.classList.contains('hoverState')) paperButton.classList.toggle('hoverState');
 });
 scissorsButton.addEventListener('mouseenter',()=> {
     scissorsButton.classList.toggle('hoverState');
 });
 
 scissorsButton.addEventListener('mouseleave',()=> {
-    scissorsButton.classList.toggle('hoverState');
+    if(scissorsButton.classList.contains('hoverState')) scissorsButton.classList.toggle('hoverState');
 });
+
+
+function flash() {
+    let nrOfFlashes = 2;
+    let i = 0;
+
+    function loop () {
+        if (i < nrOfFlashes * 2) {
+            i ++;
+            switch(playerSelection){
+                case 'rock':
+                    rockButton.classList.toggle('off');
+                    rockButtonComputer.classList.toggle('off');
+                break;
+                case 'paper':
+                    paperButton.classList.toggle('off');
+                    paperButtonComputer.classList.toggle('off');
+                break;
+                case 'scissors':
+                    scissorsButton.classList.toggle('off');
+                    scissorsButtonComputer.classList.toggle('off');
+                break;
+                default:
+                    return;
+            }
+            setTimeout(loop,200);
+        }
+    }
+
+    loop();
+}
+
+function awardPoint(winner){
+    if(winner == 'player') {
+        playerScore ++;
+        if(playerScore <= MAX_SCORE) {
+            switch(playerScore) {
+                case 1:
+                    playerPoint01.classList.toggle('activePoint');
+                break;
+                case 2:
+                    playerPoint02.classList.toggle('activePoint');
+                break;
+                case 3:
+                    playerPoint03.classList.toggle('activePoint');
+                break;
+                case 4:
+                    playerPoint04.classList.toggle('activePoint');
+                break;
+                case 5:
+                    playerPoint05.classList.toggle('activePoint');
+                    victory();
+                break;
+            }
+        }
+    } else {
+        computerScore ++;
+        if(computerScore <= MAX_SCORE) {
+            switch(computerScore) {
+                case 1:
+                    computerPoint01.classList.toggle('activePoint');
+                break;
+                case 2:
+                    computerPoint02.classList.toggle('activePoint');
+                break;
+                case 3:
+                    computerPoint03.classList.toggle('activePoint');
+                break;
+                case 4:
+                    computerPoint04.classList.toggle('activePoint');
+                break;
+                case 5:
+                    computerPoint05.classList.toggle('activePoint');
+                    defeat();
+                break;
+            }
+        } 
+    }
+}
+
+function resetPoints(){
+    playerScore = 0;
+    computerScore = 0;
+
+    playerPoint01.classList.remove('activePoint');
+    playerPoint02.classList.remove('activePoint');
+    playerPoint03.classList.remove('activePoint');
+    playerPoint04.classList.remove('activePoint');
+    playerPoint05.classList.remove('activePoint');
+
+    computerPoint01.classList.remove('activePoint');
+    computerPoint02.classList.remove('activePoint');
+    computerPoint03.classList.remove('activePoint');
+    computerPoint04.classList.remove('activePoint');
+    computerPoint05.classList.remove('activePoint');
+}
+
+function resetGame() {
+    setTimeout(()=>{
+        resetBoard();
+        resetPoints();
+    },3000);
+}
+
+
+function resetBoard() {
+    if(rockButton.classList.contains('off')) rockButton.classList.toggle('off');
+    if(paperButton.classList.contains('off')) paperButton.classList.toggle('off');
+    if(scissorsButton.classList.contains('off')) scissorsButton.classList.toggle('off');
+
+    if(rockButton.classList.contains('selected')) rockButton.classList.toggle('selected');
+    if(paperButton.classList.contains('selected')) paperButton.classList.toggle('selected');
+    if(scissorsButton.classList.contains('selected')) scissorsButton.classList.toggle('selected');
+
+    if(rockButton.classList.contains('deselected')) rockButton.classList.toggle('deselected');
+    if(paperButton.classList.contains('deselected')) paperButton.classList.toggle('deselected');
+    if(scissorsButton.classList.contains('deselected')) scissorsButton.classList.toggle('deselected');
+
+    if(rockButton.classList.contains('hoverState')) rockButton.classList.toggle('hoverState');
+    if(paperButton.classList.contains('hoverState')) paperButton.classList.toggle('hoverState');
+    if(scissorsButton.classList.contains('hoverState')) scissorsButton.classList.toggle('hoverState');
+
+    if(!rockButtonComputer.classList.contains('off')) rockButtonComputer.classList.toggle('off');
+    if(!paperButtonComputer.classList.contains('off')) paperButtonComputer.classList.toggle('off');
+    if(!scissorsButtonComputer.classList.contains('off')) scissorsButtonComputer.classList.toggle('off');
+}
 
 
 function generateComputerChoice(){
@@ -78,7 +223,8 @@ function generateComputerChoice(){
             if(i >= fastSpins) spinRate += 10 * 1.6;
             setTimeout(loopSelection,spinRate);
         } else {
-            setTimeout(() => {evaluateResult(choice);}, 500);
+            setTimeout(() => {evaluateResult(choice);}, 1000);
+            setTimeout(resetBoard, 2000);
         }
     }
 
@@ -118,23 +264,64 @@ function renderComputerChoice(choice) {
 
 
 function roundWin(){
-    console.log('You won!');
+    setTimeout(() => {awardPoint('player')}, POINT_DELAY);
+    if(!rockButtonComputer.classList.contains('off')) rockButtonComputer.classList.toggle('off');
+    if(!paperButtonComputer.classList.contains('off')) paperButtonComputer.classList.toggle('off');
+    if(!scissorsButtonComputer.classList.contains('off')) scissorsButtonComputer.classList.toggle('off');
+    isPlaying = false;
 }
 
 function roundLose() {
-    console.log('You lost!');
+    setTimeout(() => {awardPoint('computer')}, POINT_DELAY);
+    if(!rockButton.classList.contains('off')) rockButton.classList.toggle('off');
+    if(!paperButton.classList.contains('off')) paperButton.classList.toggle('off');
+    if(!scissorsButton.classList.contains('off')) scissorsButton.classList.toggle('off');
+    isPlaying = false;
 }
 
 function roundTie(){
-    console.log("It's a tie!");
+    flash();
+    isPlaying = false;
 }
 
 function victory(){
-    console.log('VICTORY! You won best of 5 games.');
+    let nrOfFlashes = 4;
+    let i = 0;
+
+    function loop () {
+        if (i < nrOfFlashes * 2) {
+            i ++;
+            playerPoint01.classList.toggle('activePoint');
+            playerPoint02.classList.toggle('activePoint');
+            playerPoint03.classList.toggle('activePoint');
+            playerPoint04.classList.toggle('activePoint');
+            playerPoint05.classList.toggle('activePoint');
+            setTimeout(loop,200);
+        }
+    }
+
+    loop();
+    resetGame();
 }
 
 function defeat(){
-    console.log('DEAFEAT! You lost best of 5 games.');
+    let nrOfFlashes = 6;
+    let i = 0;
+
+    function loop () {
+        if (i < nrOfFlashes * 2) {
+            i ++;
+            computerPoint01.classList.toggle('activePoint');
+            computerPoint02.classList.toggle('activePoint');
+            computerPoint03.classList.toggle('activePoint');
+            computerPoint04.classList.toggle('activePoint');
+            computerPoint05.classList.toggle('activePoint');
+            setTimeout(loop,200);
+        }
+    }
+
+    loop();
+    resetGame();
 }
 
 function playRound(){
@@ -170,13 +357,8 @@ function playRound(){
         break;
     }
     
-    
-
     generateComputerChoice();
-    //console.log('computer selecrion is ' + computerSelection);
-    isPlaying = false;
-
-    //setTimeout(function () {evaluateResult(playerSelection, computerSelection)},5000);
+    //isPlaying = false;
 
 }
 
@@ -218,15 +400,6 @@ function getRandomInt(max){
     }
     currentRandomInt = randomInt;
     return randomInt; 
-}
-
-function game () {
-    while ((playerScore || computerScore) <= 2) {
-        playRound((prompt("Rock, paper or scissors...make your choice:")), getComputerChoice());
-
-        if(playerScore > 2) victory();
-        if(computerScore > 2) defeat();
-    }
 }
 
 
