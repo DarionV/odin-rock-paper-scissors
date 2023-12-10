@@ -70,6 +70,7 @@ body {
 .rock, .paper, .scissors {
     background-position: center;
     background-size: contain;
+    background-repeat: no-repeat;
     width: 200px;
     height: 200px;
 }
@@ -107,6 +108,48 @@ body {
     background-image: url('/images/scissors_off.png');
 }
 
+.rockLogo, .paperLogo, .scissorsLogo {
+    background-size:contain;
+    background-repeat: no-repeat;
+    height: 128px;
+    width: 356px;
+    transition-property: background-image;
+}
+
+.rockLogo {
+    background-image: url('/images/logo_rock.png');
+    background-position: right;
+}
+.paperLogo {
+    background-image: url('/images/logo_paper.png');
+    background-position: center;
+}
+.scissorsLogo {
+    background-image: url('/images/logo_scissors.png');
+    background-position: left;
+}
+
+.off.rockLogo {
+    background-image: url('/images/logo_rock_off.png');
+}
+
+.off.paperLogo {
+    background-image: url('/images/logo_paper_off.png');
+}
+
+.off.scissorsLogo {
+    background-image: url('/images/logo_scissors_off.png');
+}
+
+.slowTransition {
+    transition-duration: 2s; 
+}
+
+
+
+
+
+
 .weaponButton.computer {
     cursor: default;
 }
@@ -116,4 +159,5 @@ body {
     background-position: center;
     background-size: contain;
 }
+
 

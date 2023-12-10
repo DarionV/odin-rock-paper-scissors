@@ -12,11 +12,19 @@ let randomInt;
 const MAX_SCORE = 5;
 const POINT_DELAY = 1000;
 
+let masterAudioLevel = 1;
+
 const audioStatic01 = new Audio("/audio/static_01.m4a");
 audioStatic01.volume = 0.1;
 
+
+
 const audioDefeat = new Audio("/audio/defeat.m4a");
 audioDefeat.volume = 0.1;
+
+const audioTie = new Audio("/audio/tie.m4a");
+audioTie.volume = 0.1;
+
 
 const audioLose = new Audio("/audio/lose.m4a");
 audioLose.volume = 0.1;
@@ -27,7 +35,6 @@ audioPointOn.volume=0.1;
 
 const audioStatic02 = new Audio("/audio/static_02.m4a");
 audioStatic02.volume = 0.005;
-audioStatic02.play();
 audioStatic02.loop = true;
 
 
@@ -38,6 +45,10 @@ const audioSwitch09 = new Audio("/audio/switch_09.m4a");
 
 audioSwitch07.volume = 0.2;
 audioSwitch09.volume = 0.2;
+
+const rockLogo = document.querySelector('#logo-rock');
+const paperLogo = document.querySelector('#logo-paper');
+const scissorsLogo = document.querySelector('#logo-scissors');
 
 const rockButton = document.querySelector('#rock-button-player');
 const paperButton = document.querySelector('#paper-button-player');
@@ -59,7 +70,10 @@ const computerPoint03 = document.querySelector('#computer-point-03');
 const computerPoint04 = document.querySelector('#computer-point-04');
 const computerPoint05 = document.querySelector('#computer-point-05');
 
-let isPlaying = false;
+
+
+let isPlaying = true;
+
 document.addEventListener('click',(event)=> {
     switch (event.target.id) {
         case 'rock-button-player':
@@ -82,24 +96,37 @@ document.addEventListener('click',(event)=> {
 
 //Work around for hover state that is not working properly. When clicking a button the image is being translated upwards,
 //however the hover property prevented the image from being translated until the user removed the mouse pointer from the image.
-
-
 rockButton.addEventListener('mouseenter',()=> {
-    rockButton.classList.toggle('hoverState');
+    if(!isPlaying) { 
+        rockButton.classList.toggle('hoverState'); 
+        const audioBuzz01 = new Audio("/audio/buzz_01.m4a");
+        audioBuzz01.volume = 0.05;
+        audioBuzz01.play();
+    }
 });
 
 rockButton.addEventListener('mouseleave',()=> {
     if(rockButton.classList.contains('hoverState'))rockButton.classList.toggle('hoverState');
 });
 paperButton.addEventListener('mouseenter',()=> {
-    paperButton.classList.toggle('hoverState');
+    if(!isPlaying) {
+        paperButton.classList.toggle('hoverState');
+        const audioBuzz02 = new Audio("/audio/buzz_02.m4a");
+        audioBuzz02.volume = 0.05;
+        audioBuzz02.play();
+    }
 });
 
 paperButton.addEventListener('mouseleave',()=> {
     if(paperButton.classList.contains('hoverState')) paperButton.classList.toggle('hoverState');
 });
 scissorsButton.addEventListener('mouseenter',()=> {
-    scissorsButton.classList.toggle('hoverState');
+    if(!isPlaying) {
+        scissorsButton.classList.toggle('hoverState');
+        const audioBuzz03 = new Audio("/audio/buzz_03.m4a");
+        audioBuzz03.volume = 0.05;
+        audioBuzz03.play();
+    }
 });
 
 scissorsButton.addEventListener('mouseleave',()=> {
@@ -188,6 +215,18 @@ function awardPoint(winner){
     }
 }
 
+function turnOffLogo() {
+   if(!rockLogo.classList.contains('off')) rockLogo.classList.toggle('off');
+   if(!paperLogo.classList.contains('off')) paperLogo.classList.toggle('off');
+   if(!scissorsLogo.classList.contains('off')) scissorsLogo.classList.toggle('off');
+}
+
+function turnOffPlayerWeapons() {
+    if(!rockButton.classList.contains('off')) rockButton.classList.toggle('off');
+    if(!paperButton.classList.contains('off')) paperButton.classList.toggle('off');
+    if(!scissorsButton.classList.contains('off')) scissorsButton.classList.toggle('off');
+ }
+
 function resetPoints(){
     playerScore = 0;
     computerScore = 0;
@@ -207,13 +246,33 @@ function resetPoints(){
 
 function resetGame() {
     setTimeout(()=>{
-        resetBoard();
+        resetComputerWeapons();
+        resetLogo();
         resetPoints();
+        startGame();
     },3000);
+
 }
 
+function resetBoard(){
+    resetPlayerWeapons();
+    resetComputerWeapons();
+    resetLogo();
+}
 
-function resetBoard() {
+function resetLogo(){
+    rockLogo.classList.remove('slowTransition');
+    paperLogo.classList.remove('slowTransition');
+    scissorsLogo.classList.remove('slowTransition');
+}
+
+function resetComputerWeapons() {
+    if(!rockButtonComputer.classList.contains('off')) rockButtonComputer.classList.toggle('off');
+    if(!paperButtonComputer.classList.contains('off')) paperButtonComputer.classList.toggle('off');
+    if(!scissorsButtonComputer.classList.contains('off')) scissorsButtonComputer.classList.toggle('off');
+}
+
+function resetPlayerWeapons(){
     if(rockButton.classList.contains('off')) rockButton.classList.toggle('off');
     if(paperButton.classList.contains('off')) paperButton.classList.toggle('off');
     if(scissorsButton.classList.contains('off')) scissorsButton.classList.toggle('off');
@@ -229,10 +288,6 @@ function resetBoard() {
     if(rockButton.classList.contains('hoverState')) rockButton.classList.toggle('hoverState');
     if(paperButton.classList.contains('hoverState')) paperButton.classList.toggle('hoverState');
     if(scissorsButton.classList.contains('hoverState')) scissorsButton.classList.toggle('hoverState');
-
-    if(!rockButtonComputer.classList.contains('off')) rockButtonComputer.classList.toggle('off');
-    if(!paperButtonComputer.classList.contains('off')) paperButtonComputer.classList.toggle('off');
-    if(!scissorsButtonComputer.classList.contains('off')) scissorsButtonComputer.classList.toggle('off');
 }
 
 
@@ -263,11 +318,9 @@ function generateComputerChoice(){
 function renderComputerChoice(choice) {
 
     currentRandomInt = choice;
-
     
     audioStatic01.play();
     
-
     switch(choice) {
         case 0:
             const audioSwitch04 = new Audio("/audio/switch_04.m4a");
@@ -304,6 +357,47 @@ function renderComputerChoice(choice) {
     }
 }
 
+//Only used for winning animation
+function renderPlayerChoice(choice) {
+
+    currentRandomInt = choice;
+    
+    switch(choice) {
+        case 0:
+            const audioSwitch04 = new Audio("/audio/switch_04.m4a");
+            audioSwitch04.volume = 0.05;
+            audioSwitch04.play();
+            rockButton.classList.toggle('off');
+            if(!paperButton.classList.contains('off')) paperButton.classList.toggle('off');
+            if(!scissorsButton.classList.contains('off')) scissorsButton.classList.toggle('off');       
+        break;
+
+        case 1:
+            const audioSwitch05 = new Audio("/audio/switch_05.m4a");
+            audioSwitch05.volume = 0.05;
+            audioSwitch05.play();
+            paperButton.classList.toggle('off');
+            if(!rockButton.classList.contains('off')) rockButton.classList.toggle('off');
+            if(!scissorsButton.classList.contains('off')) scissorsButton.classList.toggle('off'); 
+            
+        break;
+
+        case 2:
+            const audioSwitch06 = new Audio("/audio/switch_06.m4a");
+            audioSwitch06.volume = 0.05;
+            audioSwitch06.play();
+             scissorsButton.classList.toggle('off');
+             if(!paperButton.classList.contains('off')) paperButton.classList.toggle('off');
+             if(!rockButton.classList.contains('off')) rockButton.classList.toggle('off'); 
+            
+        break;
+
+        default:
+            console.log('Hmm error....' + choice);
+
+    }
+}
+
 
 function roundWin(){
     audioLose.play();
@@ -326,10 +420,11 @@ function roundLose() {
 function roundTie(){
     flash();
     isPlaying = false;
+    audioTie.play();
 }
 
 function victory(){
-    let nrOfFlashes = 4;
+    let nrOfFlashes = 8;
     let i = 0;
 
     function loop () {
@@ -340,11 +435,23 @@ function victory(){
             playerPoint03.classList.toggle('activePoint');
             playerPoint04.classList.toggle('activePoint');
             playerPoint05.classList.toggle('activePoint');
-            setTimeout(loop,200);
+
+            rockLogo.classList.toggle('off');
+            paperLogo.classList.toggle('off');
+            scissorsLogo.classList.toggle('off');
+
+            renderComputerChoice(getRandomInt(3))
+            renderPlayerChoice(getRandomInt(3))
+
+            setTimeout(loop,140);
+        } else {
+            resetComputerWeapons();
+            turnOffPlayerWeapons();
+            turnOffLogo();
         }
     }
-
     loop();
+    
     resetGame();
 }
 
@@ -365,14 +472,13 @@ function defeat(){
             setTimeout(loop,200);
         }
     }
-
     loop();
-    resetGame();
+    powerDown();
 }
 
 function playRound(){
 
-    isPlaying = true;
+     isPlaying = true;
 
     switch (playerSelection){
         case 'rock':
@@ -448,4 +554,52 @@ function getRandomInt(max){
     return randomInt; 
 }
 
+function startGame(){
+
+    audioLose.play();
+    
+    //audioStatic02.play();
+
+    rockLogo.classList.toggle('off');
+    paperLogo.classList.toggle('off');
+    scissorsLogo.classList.toggle('off');
+
+    setTimeout(()=> {
+        isPlaying = false;
+        const audioLose2 = new Audio('/audio/lose.m4a');
+        audioLose2.volume = 0.4;
+        audioLose2.play();
+        const audioBuzz01 = new Audio("/audio/buzz_01.m4a");
+        audioBuzz01.volume = 0.1;
+        audioBuzz01.play();
+        if(rockButton.classList.contains('off')) rockButton.classList.toggle('off');
+        if(paperButton.classList.contains('off')) paperButton.classList.toggle('off');
+        if(scissorsButton.classList.contains('off')) scissorsButton.classList.toggle('off');
+    },1000);
+   
+
+ 
+}
+
+function powerDown() {
+    isPlaying = true;
+    
+    rockLogo.classList.toggle('slowTransition');
+    paperLogo.classList.toggle('slowTransition');
+    scissorsLogo.classList.toggle('slowTransition');
+
+    rockLogo.classList.toggle('off');
+    paperLogo.classList.toggle('off');
+    scissorsLogo.classList.toggle('off');
+
+    rockButton.classList.toggle('off');
+    paperButton.classList.toggle('off');
+    scissorsButton.classList.toggle('off');
+
+    setTimeout(resetGame(), 2000);
+
+    audioStatic02.pause();
+}
+
+setTimeout(startGame,1000);
 
