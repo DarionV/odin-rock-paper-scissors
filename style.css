@@ -1,7 +1,8 @@
 *{
     margin:0;
     padding: 0;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 200;
 }
 
 body {
@@ -13,7 +14,31 @@ body {
     height:100vh;
 }
 
-.header, .weaponContainer, .score, .divider {
+#muteButton {
+    all:unset;
+    margin-left: auto;
+    margin-right: 60px;
+    height: 32px;
+    width: 32px;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+#muteButton.soundOn {
+    background-image: url('/images/sound_on.png');
+}
+
+#muteButton.soundOff {
+    background-image: url('/images/sound_off.png');
+}
+
+.muteButtonContainer {
+    display: flex;
+}
+
+.header, .weaponContainer, .score, .divider, .playerContent {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -143,6 +168,12 @@ body {
 
 .slowTransition {
     transition-duration: 2s; 
+}
+
+a {
+    text-decoration: none;
+    color: rgb(124, 124, 124);
+    font-weight: bold;
 }
 
 
