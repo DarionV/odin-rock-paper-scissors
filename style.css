@@ -18,13 +18,18 @@ body {
     height:100vh;
     align-items: center;
 }
+.muteButtonContainer {
+    width: 100vw;
+    display: flex;
+}
+
 
 #muteButton {
     all:unset;
-    margin-left: auto;
-    margin-right: 60px;
     height: 28px;
     width: 28px;
+    margin-left: auto;
+    margin-right: 60px;
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
@@ -41,19 +46,12 @@ body {
     background-image: url('/images/sound_off.png');
 }
 
-.muteButtonContainer {
-    display: flex;
-}
 
 .header, .weaponContainer, .score, .divider, .playerContent {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-
-/* .weaponContainer {
-    width: 400px;
-} */
 
 .main {
     width: 100vw;
@@ -216,24 +214,6 @@ a {
     background-size: contain;
 }
 
-/* .header {
-    background-color: red;
-} */
-
-/* .rockLogo {
-    min-width: 100px;
-    background-color: aqua;
-}
-
-.paperLogo {
-    min-width: 100px;
-    background-color: beige;
-}
-.scissorsLogo {
-    min-width: 100px;
-    background-color: chocolate;
-} */
-
 @media screen and (max-width: 790px) {
     html, body {
         margin:0px;
@@ -280,10 +260,9 @@ a {
 
     .muteButtonContainer {
         margin-top: auto;
-        width: 100vw;
     }
     body {
-        background-size: 350%;
+        background-size: 250%;
         background-repeat: no-repeat;
         height: 90vh;
     }
