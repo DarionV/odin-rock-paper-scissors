@@ -161,7 +161,7 @@ function flash() {
         if (i < nrOfFlashes * 2) {
             i ++;
             const audioBuzz01 = new Audio("/audio/buzz_01.m4a");
-            audioBuzz01.volume = 0.1;
+            audioBuzz01.volume = 0.05;
             audioBuzz01.play();
             switch(playerSelection){
                 case 'rock':

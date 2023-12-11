@@ -18,13 +18,15 @@ body {
     all:unset;
     margin-left: auto;
     margin-right: 60px;
-    height: 32px;
-    width: 32px;
+    height: 28px;
+    width: 28px;
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
     cursor: pointer;
+    opacity:50%;
 }
+
 
 #muteButton.soundOn {
     background-image: url('/images/sound_on.png');
@@ -49,6 +51,15 @@ body {
     width: 500px;
     height: 1px;
     margin: 10px auto;
+
+background: #ffffff; /* Old browsers */
+background: -moz-linear-gradient(left,  hsl(0, 100%, 0%) 0%, #a9a9a9 25%, #a9a9a9 75%, hsl(0, 100%, 0%) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, right top, color-stop(0%,hsl(0, 100%, 0%)), color-stop(25%,#a9a9a9), color-stop(75%,#a9a9a9), color-stop(100%,hsl(0, 100%, 0%))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(left,  hsl(0, 100%, 0%) 0%,#a9a9a9 25%,#a9a9a9 75%,hsl(0, 100%, 0%) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(left,  hsl(0, 100%, 0%) 0%,#a9a9a9 25%,#a9a9a9 75%,hsl(0, 100%, 0%) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(left,  hsl(0, 100%, 0%) 0%,#a9a9a9 25%,#a9a9a9 75%,hsl(0, 100%, 0%) 100%); /* IE10+ */
+background: linear-gradient(left,  hsl(0, 100%, 0%) 0%,#a9a9a9 25%,#a9a9a9 75%,hsl(0, 100%, 0%) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='hsl(0, 100%, 0%)', endColorstr='hsl(0, 100%, 0%)',GradientType=1 ); /* IE6-9 */
 }
 
 .point {
