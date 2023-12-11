@@ -6,7 +6,7 @@
 }
 
 body {
-    background-image: url("/images/brick_background.png");
+    background-image: url("images/brick_background.png");
     background-position: center;
     background-size: cover;
     display: flex;
@@ -64,11 +64,11 @@ body {
 }
 
 #muteButton.soundOn {
-    background-image: url('/images/sound_on.png');
+    background-image: url('images/sound_on.png');
 }
 
 #muteButton.soundOff {
-    background-image: url('/images/sound_off.png');
+    background-image: url('images/sound_off.png');
 }
 
 .header, .weaponContainer, .score, .divider, .playerContent {
@@ -131,15 +131,15 @@ body {
 }
 
 .rock {
-    background-image: url('/images/rock_on.png');
+    background-image: url('images/rock_on.png');
 }
 
 .paper {
-    background-image: url('/images/paper_on.png');
+    background-image: url('images/paper_on.png');
 }
 
 .scissors {
-    background-image: url('/images/scissors_on.png');
+    background-image: url('images/scissors_on.png');
 }
 
 .rock, .paper, .scissors {
@@ -173,15 +173,15 @@ body {
 }
 
 .off.rock {
-    background-image: url('/images/rock_off.png');
+    background-image: url('images/rock_off.png');
 }
 
 .off.paper {
-    background-image: url('/images/paper_off.png');
+    background-image: url('images/paper_off.png');
 }
 
 .off.scissors {
-    background-image: url('/images/scissors_off.png');
+    background-image: url('images/scissors_off.png');
 }
 
 .rockLogo, .paperLogo, .scissorsLogo {
@@ -193,30 +193,30 @@ body {
 }
 
 .rockLogo {
-    background-image: url('/images/logo_rock.png');
+    background-image: url('images/logo_rock.png');
     background-position: right;
 }
 
 .paperLogo {
-    background-image: url('/images/logo_paper.png');
+    background-image: url('images/logo_paper.png');
     background-position: center;
 }
 
 .scissorsLogo {
-    background-image: url('/images/logo_scissors.png');
+    background-image: url('images/logo_scissors.png');
     background-position: left;
 }
 
 .off.rockLogo {
-    background-image: url('/images/logo_rock_off.png');
+    background-image: url('images/logo_rock_off.png');
 }
 
 .off.paperLogo {
-    background-image: url('/images/logo_paper_off.png');
+    background-image: url('images/logo_paper_off.png');
 }
 
 .off.scissorsLogo {
-    background-image: url('/images/logo_scissors_off.png');
+    background-image: url('images/logo_scissors_off.png');
 }
 
 .slowTransition {
@@ -234,7 +234,7 @@ a {
 }
 
 .activePoint {
-    background-image: url('/images/point_on.png');
+    background-image: url('images/point_on.png');
     background-position: center;
     background-size: contain;
 }
