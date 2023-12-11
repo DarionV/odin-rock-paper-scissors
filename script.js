@@ -12,29 +12,29 @@ const POINT_DELAY = 1000;
 
 let isMuted = false;
 
-const audioStatic01 = new Audio("/audio/static_01.m4a");
+const audioStatic01 = new Audio("audio/static_01.m4a");
 audioStatic01.volume = 0.1;
 
-const audioDefeat = new Audio("/audio/defeat.m4a");
+const audioDefeat = new Audio("audio/defeat.m4a");
 audioDefeat.volume = 0.1;
 
-const audioTie = new Audio("/audio/tie.m4a");
+const audioTie = new Audio("audio/tie.m4a");
 audioTie.volume = 0.1;
 
-const audioBigSwitch = new Audio("/audio/bigSwitch.aac");
+const audioBigSwitch = new Audio("audio/bigSwitch.aac");
 audioBigSwitch.volume = 0.1;
 
-const audioPointOn = new Audio("/audio/point_on.m4a");
+const audioPointOn = new Audio("audio/point_on.m4a");
 audioPointOn.volume=0.1;
             
-const audioStatic02 = new Audio("/audio/static_02.m4a");
+const audioStatic02 = new Audio("audio/static_02.m4a");
 audioStatic02.volume = 0.005;
 audioStatic02.loop = true;
 
-const audioSwitch05 = new Audio("/audio/switch_05.m4a");
-const audioSwitch06 = new Audio("/audio/switch_06.m4a");
-const audioSwitch07 = new Audio("/audio/switch_07.m4a");
-const audioSwitch09 = new Audio("/audio/switch_09.m4a");
+const audioSwitch05 = new Audio("audio/switch_05.m4a");
+const audioSwitch06 = new Audio("audio/switch_06.m4a");
+const audioSwitch07 = new Audio("audio/switch_07.m4a");
+const audioSwitch09 = new Audio("audio/switch_09.m4a");
 
 audioSwitch07.volume = 0.2;
 audioSwitch09.volume = 0.2;
@@ -145,7 +145,7 @@ function flash() {
     function loop () {
         if (i < nrOfFlashes * 2) {
             i ++;
-            const audioBuzz01 = new Audio("/audio/buzz_01.m4a");
+            const audioBuzz01 = new Audio("audio/buzz_01.m4a");
             audioBuzz01.volume = 0.05;
             audioBuzz01.play();
 
@@ -328,7 +328,7 @@ function renderComputerChoice(choice) {
     
     switch(choice) {
         case 0:
-            const audioSwitch04 = new Audio("/audio/switch_04.m4a");
+            const audioSwitch04 = new Audio("audio/switch_04.m4a");
             audioSwitch04.volume = 0.05;
             if(!isMuted)audioSwitch04.play();
             rockButtonComputer.classList.toggle('off');
@@ -337,7 +337,7 @@ function renderComputerChoice(choice) {
         break;
 
         case 1:
-            const audioSwitch05 = new Audio("/audio/switch_05.m4a");
+            const audioSwitch05 = new Audio("audio/switch_05.m4a");
             audioSwitch05.volume = 0.05;
             if(!isMuted)audioSwitch05.play();
             paperButtonComputer.classList.toggle('off');
@@ -346,7 +346,7 @@ function renderComputerChoice(choice) {
         break;
 
         case 2:
-            const audioSwitch06 = new Audio("/audio/switch_06.m4a");
+            const audioSwitch06 = new Audio("audio/switch_06.m4a");
             audioSwitch06.volume = 0.05;
             if(!isMuted)audioSwitch06.play();
              scissorsButtonComputer.classList.toggle('off');
@@ -367,7 +367,7 @@ function renderPlayerChoice(choice) {
     
     switch(choice) {
         case 0:
-            const audioSwitch04 = new Audio("/audio/switch_04.m4a");
+            const audioSwitch04 = new Audio("audio/switch_04.m4a");
             audioSwitch04.volume = 0.05;
             if(!isMuted)audioSwitch04.play();
             rockButton.classList.toggle('off');
@@ -376,7 +376,7 @@ function renderPlayerChoice(choice) {
         break;
 
         case 1:
-            const audioSwitch05 = new Audio("/audio/switch_05.m4a");
+            const audioSwitch05 = new Audio("audio/switch_05.m4a");
             audioSwitch05.volume = 0.05;
             if(!isMuted)audioSwitch05.play();
             paperButton.classList.toggle('off');
@@ -385,7 +385,7 @@ function renderPlayerChoice(choice) {
         break;
 
         case 2:
-            const audioSwitch06 = new Audio("/audio/switch_06.m4a");
+            const audioSwitch06 = new Audio("audio/switch_06.m4a");
             audioSwitch06.volume = 0.05;
             if(!isMuted)audioSwitch06.play();
              scissorsButton.classList.toggle('off');
@@ -560,10 +560,10 @@ function startGame(){
 
     setTimeout(()=> {
         isPlaying = false;
-        const audioBigSwitch2 = new Audio('/audio/bigSwitch.aac');
+        const audioBigSwitch2 = new Audio('audio/bigSwitch.aac');
         audioBigSwitch2.volume = 0.4;
         if(!isMuted)audioBigSwitch2.play();
-        const audioBuzz01 = new Audio("/audio/buzz_01.m4a");
+        const audioBuzz01 = new Audio("audio/buzz_01.m4a");
         audioBuzz01.volume = 0.1;
         if(!isMuted)audioBuzz01.play();
         if(rockButton.classList.contains('off')) rockButton.classList.toggle('off');
