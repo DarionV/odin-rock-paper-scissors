@@ -1,10 +1,8 @@
-const choices = ['rock', 'paper', 'scissors'];
-
 let playerScore = 0;
 let computerScore = 0;
 
 let currentComputerSelection = '';
-let playerSelection;
+let playerSelection = '';
 
 let currentRandomInt;
 let randomInt;
@@ -17,26 +15,21 @@ let isMuted = false;
 const audioStatic01 = new Audio("/audio/static_01.m4a");
 audioStatic01.volume = 0.1;
 
-
-
 const audioDefeat = new Audio("/audio/defeat.m4a");
 audioDefeat.volume = 0.1;
 
 const audioTie = new Audio("/audio/tie.m4a");
 audioTie.volume = 0.1;
 
-
-const audioLose = new Audio("/audio/lose.m4a");
-audioLose.volume = 0.1;
+const audioBigSwitch = new Audio("/audio/bigSwitch.aac");
+audioBigSwitch.volume = 0.1;
 
 const audioPointOn = new Audio("/audio/point_on.m4a");
 audioPointOn.volume=0.1;
             
-
 const audioStatic02 = new Audio("/audio/static_02.m4a");
 audioStatic02.volume = 0.005;
 audioStatic02.loop = true;
-
 
 const audioSwitch05 = new Audio("/audio/switch_05.m4a");
 const audioSwitch06 = new Audio("/audio/switch_06.m4a");
@@ -71,10 +64,18 @@ const computerPoint04 = document.querySelector('#computer-point-04');
 const computerPoint05 = document.querySelector('#computer-point-05');
 
 const muteButton = document.querySelector('#muteButton');
-
-
+const loadingContainer = document.querySelector('.loadingContainer');
+const loadingText = document.querySelector('.loadingText');
+const playButton = document.querySelector('.playButton');
 
 let isPlaying = true;
+
+// ------Event listeners------ //
+
+playButton.addEventListener('click', ()=>{
+    loadingContainer.style.display = "none";
+    setTimeout(startGame,1000);
+});
 
 document.addEventListener('click',(event)=> {
     switch (event.target.id) {
@@ -98,39 +99,24 @@ document.addEventListener('click',(event)=> {
 
 muteButton.addEventListener('click', toggleMute);
 
-//Work around for hover state that is not working properly. When clicking a button the image is being translated upwards,
-//however the hover property prevented the image from being translated until the user removed the mouse pointer from the image.
 rockButton.addEventListener('mouseenter',()=> {
-    if(!isPlaying) { 
-        rockButton.classList.toggle('hoverState'); 
-        // const audioBuzz01 = new Audio("/audio/buzz_01.m4a");
-        // audioBuzz01.volume = 0.05;
-        // if(!isMuted)audioBuzz01.play();
-    }
+    if(!isPlaying) rockButton.classList.toggle('hoverState'); 
 });
 
 rockButton.addEventListener('mouseleave',()=> {
     if(rockButton.classList.contains('hoverState'))rockButton.classList.toggle('hoverState');
 });
+
 paperButton.addEventListener('mouseenter',()=> {
-    if(!isPlaying) {
-        paperButton.classList.toggle('hoverState');
-        // const audioBuzz02 = new Audio("/audio/buzz_02.m4a");
-        // audioBuzz02.volume = 0.05;
-        // if(!isMuted)audioBuzz02.play();
-    }
+    if(!isPlaying) paperButton.classList.toggle('hoverState');
 });
 
 paperButton.addEventListener('mouseleave',()=> {
     if(paperButton.classList.contains('hoverState')) paperButton.classList.toggle('hoverState');
 });
+
 scissorsButton.addEventListener('mouseenter',()=> {
-    if(!isPlaying) {
-        scissorsButton.classList.toggle('hoverState');
-        // const audioBuzz03 = new Audio("/audio/buzz_03.m4a");
-        // audioBuzz03.volume = 0.05;
-        // if(!isMuted)audioBuzz03.play();
-    }
+    if(!isPlaying) scissorsButton.classList.toggle('hoverState');
 });
 
 scissorsButton.addEventListener('mouseleave',()=> {
@@ -140,22 +126,21 @@ scissorsButton.addEventListener('mouseleave',()=> {
 function toggleMute(){
     muteButton.classList.toggle('soundOn');
     muteButton.classList.toggle('soundOff');
-    // isMuted ? isMuted=false : isMuted=true;
-    // audioStatic02.pause();
     if(isMuted) {
         isMuted = false;
         audioStatic02.play();
     } else {
         isMuted = true;
         audioStatic02.pause();
+        audioStatic01.pause();
     }
 }
 
+//---- Functions ----//
 
 function flash() {
     let nrOfFlashes = 2;
     let i = 0;
-    
 
     function loop () {
         if (i < nrOfFlashes * 2) {
@@ -163,6 +148,7 @@ function flash() {
             const audioBuzz01 = new Audio("/audio/buzz_01.m4a");
             audioBuzz01.volume = 0.05;
             audioBuzz01.play();
+
             switch(playerSelection){
                 case 'rock':
                     rockButton.classList.toggle('off');
@@ -182,7 +168,6 @@ function flash() {
             setTimeout(loop,200);
         }
     }
-
     loop();
 }
 
@@ -314,7 +299,6 @@ function resetPlayerWeapons(){
 
 
 function generateComputerChoice(){
-
     let i = 0;
     let fastSpins = 5;
     let spinRate = 100;
@@ -333,7 +317,6 @@ function generateComputerChoice(){
             setTimeout(resetBoard, 2000);
         }
     }
-
     loopSelection();
 }
 
@@ -360,7 +343,6 @@ function renderComputerChoice(choice) {
             paperButtonComputer.classList.toggle('off');
             if(!rockButtonComputer.classList.contains('off')) rockButtonComputer.classList.toggle('off');
             if(!scissorsButtonComputer.classList.contains('off')) scissorsButtonComputer.classList.toggle('off'); 
-            
         break;
 
         case 2:
@@ -369,17 +351,16 @@ function renderComputerChoice(choice) {
             if(!isMuted)audioSwitch06.play();
              scissorsButtonComputer.classList.toggle('off');
              if(!paperButtonComputer.classList.contains('off')) paperButtonComputer.classList.toggle('off');
-             if(!rockButtonComputer.classList.contains('off')) rockButtonComputer.classList.toggle('off'); 
-            
+             if(!rockButtonComputer.classList.contains('off')) rockButtonComputer.classList.toggle('off');     
         break;
 
         default:
-            console.log('Hmm error....' + choice);
+            console.log('Error....' + choice);
 
     }
 }
 
-//Only used for winning animation
+//Used for winning animation
 function renderPlayerChoice(choice) {
 
     currentRandomInt = choice;
@@ -400,8 +381,7 @@ function renderPlayerChoice(choice) {
             if(!isMuted)audioSwitch05.play();
             paperButton.classList.toggle('off');
             if(!rockButton.classList.contains('off')) rockButton.classList.toggle('off');
-            if(!scissorsButton.classList.contains('off')) scissorsButton.classList.toggle('off'); 
-            
+            if(!scissorsButton.classList.contains('off')) scissorsButton.classList.toggle('off');      
         break;
 
         case 2:
@@ -410,19 +390,17 @@ function renderPlayerChoice(choice) {
             if(!isMuted)audioSwitch06.play();
              scissorsButton.classList.toggle('off');
              if(!paperButton.classList.contains('off')) paperButton.classList.toggle('off');
-             if(!rockButton.classList.contains('off')) rockButton.classList.toggle('off'); 
-            
+             if(!rockButton.classList.contains('off')) rockButton.classList.toggle('off');     
         break;
 
         default:
-            console.log('Hmm error....' + choice);
-
+            console.log('Error....' + choice);
     }
 }
 
 
 function roundWin(){
-    if(!isMuted)audioLose.play();
+    if(!isMuted)audioBigSwitch.play();
     setTimeout(() => {awardPoint('player')}, POINT_DELAY);
     if(!rockButtonComputer.classList.contains('off')) rockButtonComputer.classList.toggle('off');
     if(!paperButtonComputer.classList.contains('off')) paperButtonComputer.classList.toggle('off');
@@ -431,7 +409,7 @@ function roundWin(){
 }
 
 function roundLose() {
-    if(!isMuted)audioLose.play();
+    if(!isMuted)audioBigSwitch.play();
     setTimeout(() => {awardPoint('computer')}, POINT_DELAY);
     if(!rockButton.classList.contains('off')) rockButton.classList.toggle('off');
     if(!paperButton.classList.contains('off')) paperButton.classList.toggle('off');
@@ -442,7 +420,6 @@ function roundLose() {
 function roundTie(){
     flash();
     isPlaying = false;
-    //if(!isMuted)audioTie.play();
 }
 
 function victory(){
@@ -499,7 +476,6 @@ function defeat(){
 }
 
 function playRound(){
-
      isPlaying = true;
 
     switch (playerSelection){
@@ -530,10 +506,7 @@ function playRound(){
             rockButton.classList.toggle('off');
         break;
     }
-    
     generateComputerChoice();
-    //isPlaying = false;
-
 }
 
 function evaluateResult(computerSelection){
@@ -564,7 +537,6 @@ function evaluateResult(computerSelection){
 
             default: 
                 roundTie()
-                console.log('Something went wrong');
         }
 }
 
@@ -578,7 +550,7 @@ function getRandomInt(max){
 
 function startGame(){
 
-    if(!isMuted)audioLose.play();
+    if(!isMuted)audioBigSwitch.play();
     
     audioStatic02.play();
 
@@ -588,9 +560,9 @@ function startGame(){
 
     setTimeout(()=> {
         isPlaying = false;
-        const audioLose2 = new Audio('/audio/lose.m4a');
-        audioLose2.volume = 0.4;
-        if(!isMuted)audioLose2.play();
+        const audioBigSwitch2 = new Audio('/audio/bigSwitch.aac');
+        audioBigSwitch2.volume = 0.4;
+        if(!isMuted)audioBigSwitch2.play();
         const audioBuzz01 = new Audio("/audio/buzz_01.m4a");
         audioBuzz01.volume = 0.1;
         if(!isMuted)audioBuzz01.play();
@@ -598,9 +570,6 @@ function startGame(){
         if(paperButton.classList.contains('off')) paperButton.classList.toggle('off');
         if(scissorsButton.classList.contains('off')) scissorsButton.classList.toggle('off');
     },1000);
-   
-
- 
 }
 
 function powerDown() {
@@ -623,5 +592,12 @@ function powerDown() {
     audioStatic02.pause();
 }
 
-setTimeout(startGame,1000);
+document.onreadystatechange = function() {
+    if (document.readyState === "complete") {
+        loadingText.textContent = ""
+        playButton.style.display = "inline"
+    }
+};
+
+//setTimeout(startGame,1000);
 

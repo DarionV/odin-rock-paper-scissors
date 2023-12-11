@@ -3,10 +3,6 @@
     padding: 0;
     font-family: 'Montserrat', sans-serif;
     font-weight: 200;
-
-    /* background: #000 !important;
-    color: #0f0 !important;
-    outline: solid #f00 1px !important; */
 }
 
 body {
@@ -18,11 +14,41 @@ body {
     height:100vh;
     align-items: center;
 }
+
+.loadingContainer {
+    background-color: black;
+    color: white;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.playButton {
+    border: none;
+    width: 100px;
+    height: 48px;
+    font-size: 32px;
+    font-weight: bold;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
+
+.playButton:hover {
+    color: #cf1db4;
+}
+
 .muteButtonContainer {
     width: 100vw;
     display: flex;
 }
-
 
 #muteButton {
     all:unset;
@@ -37,7 +63,6 @@ body {
     opacity:50%;
 }
 
-
 #muteButton.soundOn {
     background-image: url('/images/sound_on.png');
 }
@@ -45,7 +70,6 @@ body {
 #muteButton.soundOff {
     background-image: url('/images/sound_off.png');
 }
-
 
 .header, .weaponContainer, .score, .divider, .playerContent {
     display: flex;
@@ -64,14 +88,14 @@ body {
     height: 1px;
     margin: 10px auto;
 
-background: #ffffff; /* Old browsers */
-background: -moz-linear-gradient(left,  hsl(0, 100%, 0%) 0%, #a9a9a9 25%, #a9a9a9 75%, hsl(0, 100%, 0%) 100%); /* FF3.6+ */
-background: -webkit-gradient(linear, left top, right top, color-stop(0%,hsl(0, 100%, 0%)), color-stop(25%,#a9a9a9), color-stop(75%,#a9a9a9), color-stop(100%,hsl(0, 100%, 0%))); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(left,  hsl(0, 100%, 0%) 0%,#a9a9a9 25%,#a9a9a9 75%,hsl(0, 100%, 0%) 100%); /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(left,  hsl(0, 100%, 0%) 0%,#a9a9a9 25%,#a9a9a9 75%,hsl(0, 100%, 0%) 100%); /* Opera 11.10+ */
-background: -ms-linear-gradient(left,  hsl(0, 100%, 0%) 0%,#a9a9a9 25%,#a9a9a9 75%,hsl(0, 100%, 0%) 100%); /* IE10+ */
-background: linear-gradient(left,  hsl(0, 100%, 0%) 0%,#a9a9a9 25%,#a9a9a9 75%,hsl(0, 100%, 0%) 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='hsl(0, 100%, 0%)', endColorstr='hsl(0, 100%, 0%)',GradientType=1 ); /* IE6-9 */
+    background: #ffffff; /* Old browsers */
+    background: -moz-linear-gradient(left,  hsl(0, 100%, 0%) 0%, #a9a9a9 25%, #a9a9a9 75%, hsl(0, 100%, 0%) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,hsl(0, 100%, 0%)), color-stop(25%,#a9a9a9), color-stop(75%,#a9a9a9), color-stop(100%,hsl(0, 100%, 0%))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(left,  hsl(0, 100%, 0%) 0%,#a9a9a9 25%,#a9a9a9 75%,hsl(0, 100%, 0%) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(left,  hsl(0, 100%, 0%) 0%,#a9a9a9 25%,#a9a9a9 75%,hsl(0, 100%, 0%) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(left,  hsl(0, 100%, 0%) 0%,#a9a9a9 25%,#a9a9a9 75%,hsl(0, 100%, 0%) 100%); /* IE10+ */
+    background: linear-gradient(left,  hsl(0, 100%, 0%) 0%,#a9a9a9 25%,#a9a9a9 75%,hsl(0, 100%, 0%) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='hsl(0, 100%, 0%)', endColorstr='hsl(0, 100%, 0%)',GradientType=1 ); /* IE6-9 */
 }
 
 .point {
@@ -109,12 +133,15 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='hsl(0, 100%, 
 .rock {
     background-image: url('/images/rock_on.png');
 }
+
 .paper {
     background-image: url('/images/paper_on.png');
 }
+
 .scissors {
     background-image: url('/images/scissors_on.png');
 }
+
 .rock, .paper, .scissors {
     background-position: center;
     background-size: contain;
@@ -140,6 +167,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='hsl(0, 100%, 
     translate: 0 20px;
     cursor: default;
 }
+
 .off {
     cursor: default;
 }
@@ -168,10 +196,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='hsl(0, 100%, 
     background-image: url('/images/logo_rock.png');
     background-position: right;
 }
+
 .paperLogo {
     background-image: url('/images/logo_paper.png');
     background-position: center;
 }
+
 .scissorsLogo {
     background-image: url('/images/logo_scissors.png');
     background-position: left;
@@ -198,11 +228,6 @@ a {
     color: rgb(124, 124, 124);
     font-weight: bold;
 }
-
-
-
-
-
 
 .weaponButton.computer {
     cursor: default;
@@ -262,7 +287,7 @@ a {
         margin-top: auto;
     }
     body {
-        background-size: 250%;
+        background-size: 350%;
         background-repeat: no-repeat;
         height: 90vh;
     }
