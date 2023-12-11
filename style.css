@@ -3,6 +3,10 @@
     padding: 0;
     font-family: 'Montserrat', sans-serif;
     font-weight: 200;
+
+    /* background: #000 !important;
+    color: #0f0 !important;
+    outline: solid #f00 1px !important; */
 }
 
 body {
@@ -12,6 +16,7 @@ body {
     display: flex;
     flex-direction: column;
     height:100vh;
+    align-items: center;
 }
 
 #muteButton {
@@ -46,9 +51,18 @@ body {
     align-items: center;
 }
 
+/* .weaponContainer {
+    width: 400px;
+} */
+
+.main {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+}
 .divider {
     background-color: rgb(151, 151, 151);
-    width: 500px;
+    width: 50vw;
     height: 1px;
     margin: 10px auto;
 
@@ -202,4 +216,84 @@ a {
     background-size: contain;
 }
 
+/* .header {
+    background-color: red;
+} */
+
+/* .rockLogo {
+    min-width: 100px;
+    background-color: aqua;
+}
+
+.paperLogo {
+    min-width: 100px;
+    background-color: beige;
+}
+.scissorsLogo {
+    min-width: 100px;
+    background-color: chocolate;
+} */
+
+@media screen and (max-width: 790px) {
+    html, body {
+        margin:0px;
+        padding: 0px;;
+    }
+    .header {
+        flex-direction: column;
+        margin: 0;
+    }
+    .scissorsLogo, .paperLogo, .rockLogo {
+        height: 48px;
+        background-position: center;
+        margin: 0px;
+    }
+
+    .scissorsLogo, .paperLogo {
+        background-size: 70%;
+    }
+
+    .rockLogo {
+        background-size: 40%;
+    }
+    .weaponButton {
+        width: 128px;
+        height: 170px;
+        margin: 0px;
+        background-size: 130%;
+        background-position: top;
+        -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+    }
+
+    .score.computer, .score.player {
+        margin:0px;
+    }
+    .divider {
+        margin:1rem 0;
+        width: 100vw;
+    }
+    #muteButton{
+        margin-right:1.5rem;
+        margin-top: auto;
+        -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+    }
+
+    .muteButtonContainer {
+        margin-top: auto;
+        width: 100vw;
+    }
+    body {
+        background-size: 350%;
+        background-repeat: no-repeat;
+        height: 90vh;
+    }
+    .selected {
+        translate: 0 -15px;
+        cursor: default;
+    }
+    .point {
+        height: 32px;
+        width: auto;
+    }
+  }
 
