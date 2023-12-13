@@ -27,10 +27,6 @@ audioBigSwitch.volume = 0.1;
 const audioPointOn = new Audio("audio/point_on.m4a");
 audioPointOn.volume=0.1;
             
-const audioStatic02 = new Audio("audio/static_02.m4a");
-audioStatic02.volume = 0.005;
-audioStatic02.loop = true;
-
 const audioSwitch05 = new Audio("audio/switch_05.m4a");
 const audioSwitch06 = new Audio("audio/switch_06.m4a");
 const audioSwitch07 = new Audio("audio/switch_07.m4a");
@@ -67,6 +63,8 @@ const muteButton = document.querySelector('#muteButton');
 const loadingContainer = document.querySelector('.loadingContainer');
 const loadingText = document.querySelector('.loadingText');
 const playButton = document.querySelector('.playButton');
+
+playButton.style.display = "none"
 
 let isPlaying = true;
 
@@ -128,10 +126,8 @@ function toggleMute(){
     muteButton.classList.toggle('soundOff');
     if(isMuted) {
         isMuted = false;
-        audioStatic02.play();
     } else {
         isMuted = true;
-        audioStatic02.pause();
         audioStatic01.pause();
     }
 }
@@ -551,8 +547,6 @@ function getRandomInt(max){
 function startGame(){
 
     if(!isMuted)audioBigSwitch.play();
-    
-    audioStatic02.play();
 
     rockLogo.classList.toggle('off');
     paperLogo.classList.toggle('off');
@@ -588,8 +582,6 @@ function powerDown() {
     scissorsButton.classList.toggle('off');
 
     setTimeout(resetGame(), 2000);
-
-    audioStatic02.pause();
 }
 
 document.onreadystatechange = function() {
@@ -598,6 +590,4 @@ document.onreadystatechange = function() {
         playButton.style.display = "inline"
     }
 };
-
-//setTimeout(startGame,1000);
 
