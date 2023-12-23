@@ -296,7 +296,7 @@ function resetPlayerWeapons(){
 
 function generateComputerChoice(){
     let i = 0;
-    let fastSpins = 5;
+    let fastSpins = 2;
     let spinRate = 100;
     let minimumSpeed = 300;
     let choice = 0;
@@ -306,7 +306,7 @@ function generateComputerChoice(){
         renderComputerChoice(choice)
         i++;
         if (spinRate < minimumSpeed) {
-            if(i >= fastSpins) spinRate += 10 * 1.6;
+            if(i >= fastSpins) spinRate += 10 * 3;
             setTimeout(loopSelection,spinRate);
         } else {
             setTimeout(() => {evaluateResult(choice);}, 1000);
